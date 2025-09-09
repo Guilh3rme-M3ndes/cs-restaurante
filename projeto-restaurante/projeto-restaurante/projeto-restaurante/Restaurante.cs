@@ -27,7 +27,18 @@ namespace projeto_restaurante
 
         public bool novoPedido(Pedido pedido) 
         {
-            return false;
+            int quant;
+            bool podeCriar = false;
+            for (quant = 0; quant < Pedidos.Length; quant++)
+            {
+                if (Pedidos[quant].Id == -1)
+                {
+                    podeCriar = true;
+                    Pedidos[quant] = pedido;
+                    break;
+                }
+            }
+            return podeCriar;
         }
 
         public Pedido buscarPedido(Pedido pedido)

@@ -29,15 +29,15 @@ namespace projeto_restaurante
 {
     internal class Program
     {
+        public static Restaurante restaurante = new Restaurante();
+        public static int idPedido = 0;
         static void Main(string[] args)
         {
-            Item item = new Item();
-            Pedido pedido = new Pedido();
-            Restaurante restaurante = new Restaurante();
+            //Item item = new Item();
+            //Pedido pedido = new Pedido();
+            //Restaurante restaurante = new Restaurante();
 
             int seletor = -1;
-            int id;
-
             while (seletor != 0)
             {
                 Console.Clear();
@@ -85,7 +85,15 @@ namespace projeto_restaurante
 
         public static void novoPedido()
         {
-
+            Console.WriteLine("Informe o nome do cliente: ");
+            string nome = Console.ReadLine();
+            Pedido pedido = new Pedido(idPedido, nome);
+            if (restaurante.novoPedido(pedido))
+            {
+                Utils.MensagemSucesso("Pedido adicionado!");
+            }
+            else
+                Utils.MensagemErro("Não foi possível adicionar o pedido");
         }
 
         public static void adicionarItemPedido()

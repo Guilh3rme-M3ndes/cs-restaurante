@@ -29,14 +29,14 @@ namespace projeto_restaurante
 {
     internal class Program
     {
+        // public static Item item = new Item();
+        public static Pedido pedido = new Pedido();
         public static Restaurante restaurante = new Restaurante();
         public static int idPedido = 0;
+        public static int idItem = 0;
+
         static void Main(string[] args)
         {
-            //Item item = new Item();
-            //Pedido pedido = new Pedido();
-            //Restaurante restaurante = new Restaurante();
-
             int seletor = -1;
             while (seletor != 0)
             {
@@ -85,20 +85,41 @@ namespace projeto_restaurante
 
         public static void novoPedido()
         {
-            Console.WriteLine("Informe o nome do cliente: ");
+            Utils.Titulo("NOVO PEDIDO");
+            Console.Write(" Informe o nome do cliente: ");
             string nome = Console.ReadLine();
-            Pedido pedido = new Pedido(idPedido, nome);
-            if (restaurante.novoPedido(pedido))
+            Pedido novoPedido = new Pedido(idPedido, nome);
+            if (restaurante.novoPedido(novoPedido))
             {
-                Utils.MensagemSucesso("Pedido adicionado!");
+                Utils.MensagemSucesso($"ID do Pedido: {novoPedido.id}\n Pedido adicionado!");
+                idPedido++;
             }
             else
-                Utils.MensagemErro("Não foi possível adicionar o pedido");
+                Utils.MensagemErro("Não foi possível adicionar o pedido.");
         }
 
         public static void adicionarItemPedido()
         {
-
+            Utils.Titulo("ADICIONAR ITEM");
+            Console.Write(" Digite o ID do Pedido: ");
+            int idPed = Utils.lerInt(Console.ReadLine(), 0, " Entrada inválida!\n Tente novamente: ");
+            if (restaurante.buscarPedido(new Pedido(idPed).Id) == -1)
+            {
+                Console.Write(" Digite a Descrição do Item: ");
+                string descricao = Console.ReadLine();
+                Console.Write(" Digite o Preço do Item: ");
+                string descricao = Utils.lerDouble(Console.ReadLine(), 0, " Entrada inválida!\n Tente novamente: ");
+                Item novoItem = new Item(idItem, descricao, preco);
+                if (pedido.adicionarItem(novoItem))
+                {
+                    Utils.MensagemSucesso($"ID do Item: {novoItem.id}\n Descrição: {novoItem.Descricao}\n Preço: {novoItem.Preco}\n Item adicionado!");
+                    idItem++;
+                }
+                else
+                    Utils.MensagemErro("Limite máximo de itens atingido.");
+            }
+            else
+                Utils.MensagemErro("ID do Pedido não encontrado.");
         }
 
         public static void removerItemPedido()

@@ -43,7 +43,16 @@ namespace projeto_restaurante
 
         public Pedido buscarPedido(Pedido pedido)
         {
-            return new Pedido();
+            Pedido achou = new Pedido();
+            foreach (Pedido p in pedidos)
+            {
+                if (p.Id == pedido.Id)
+                {
+                    achou = p;
+                    break;
+                }
+            }
+            return achou;
         }
 
         public bool cancelarPedido(Pedido pedido)

@@ -51,7 +51,27 @@ namespace projeto_restaurante
 
         public bool removerItem(Item item)
         {
-            return false;
+            int jj;
+            bool removeu = false;
+            foreach (Item i in itens)
+            {
+                if (i.Id == item.Id)
+                {
+                    int ii = 0;
+                    while (ii < this.itens.Length && this.itens[ii].Id != item.Id)
+                    {
+                        ii++;
+                    }
+                    for (jj = ii; jj < this.itens.Length - 1; jj++)
+                    {
+                        this.itens[jj] = this.itens[jj + 1];
+                    }
+                    this.itens[jj] = new Item();
+                    removeu = true;
+                    break;
+                }
+            }
+            return removeu;
         }
 
         public string dadosDoPedido()

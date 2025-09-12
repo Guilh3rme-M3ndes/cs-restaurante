@@ -1,0 +1,7 @@
+C:\temp\cs-restaurante\projeto-restaurante\projeto-restaurante\projeto-restaurante\obj\Debug\projeto-restaurante.csproj.AssemblyReference.cache
+C:\temp\cs-restaurante\projeto-restaurante\projeto-restaurante\projeto-restaurante\obj\Debug\projeto-restaurante.csproj.CoreCompileInputs.cache
+C:\temp\cs-restaurante\projeto-restaurante\projeto-restaurante\projeto-restaurante\bin\Debug\projeto-restaurante.exe.config
+C:\temp\cs-restaurante\projeto-restaurante\projeto-restaurante\projeto-restaurante\bin\Debug\projeto-restaurante.exe
+C:\temp\cs-restaurante\projeto-restaurante\projeto-restaurante\projeto-restaurante\bin\Debug\projeto-restaurante.pdb
+C:\temp\cs-restaurante\projeto-restaurante\projeto-restaurante\projeto-restaurante\obj\Debug\projeto-restaurante.exe
+C:\temp\cs-restaurante\projeto-restaurante\projeto-restaurante\projeto-restaurante\obj\Debug\projeto-restaurante.pdb

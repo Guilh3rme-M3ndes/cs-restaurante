@@ -30,7 +30,7 @@ namespace projeto_restaurante
     internal class Program
     {
         // public static Item item = new Item();
-        public static Pedido pedido = new Pedido();
+        // public static Pedido pedido = new Pedido();
         public static Restaurante restaurante = new Restaurante();
         public static int idPedido = 0;
         public static int idItem = 0;
@@ -91,7 +91,7 @@ namespace projeto_restaurante
             Pedido novoPedido = new Pedido(idPedido, nome);
             if (restaurante.novoPedido(novoPedido))
             {
-                Utils.MensagemSucesso($"ID do Pedido: {novoPedido.id}\n Pedido adicionado!");
+                Utils.MensagemSucesso($"ID do Pedido: {novoPedido.Id}\n Nome: {novoPedido.Cliente}\n Pedido adicionado!");
                 idPedido++;
             }
             else
@@ -103,16 +103,18 @@ namespace projeto_restaurante
             Utils.Titulo("ADICIONAR ITEM");
             Console.Write(" Digite o ID do Pedido: ");
             int idPed = Utils.lerInt(Console.ReadLine(), 0, " Entrada inválida!\n Tente novamente: ");
-            if (restaurante.buscarPedido(new Pedido(idPed).Id) == -1)
+            Pedido pedidoPesquisado = new Pedido(idPed);
+            if (restaurante.buscarPedido(new Pedido(idPed)).Id != -1)
             {
                 Console.Write(" Digite a Descrição do Item: ");
                 string descricao = Console.ReadLine();
                 Console.Write(" Digite o Preço do Item: ");
-                string descricao = Utils.lerDouble(Console.ReadLine(), 0, " Entrada inválida!\n Tente novamente: ");
+                double preco = Utils.lerDouble(Console.ReadLine(), 0, " Entrada inválida!\n Tente novamente: ");
                 Item novoItem = new Item(idItem, descricao, preco);
-                if (pedido.adicionarItem(novoItem))
+                bool adicionou = restaurante.buscarPedido(pedidoPesquisado).adicionarItem(novoItem);
+                if (adicionou)
                 {
-                    Utils.MensagemSucesso($"ID do Item: {novoItem.id}\n Descrição: {novoItem.Descricao}\n Preço: {novoItem.Preco}\n Item adicionado!");
+                    Utils.MensagemSucesso($"ID do Item: {novoItem.Id}\n Descrição: {novoItem.Descricao}\n Preço: R${novoItem.Preco}\n Item adicionado!");
                     idItem++;
                 }
                 else
@@ -124,7 +126,26 @@ namespace projeto_restaurante
 
         public static void removerItemPedido()
         {
-
+            Utils.Titulo("REMOVER ITEM");
+            Console.Write(" Digite o ID do Pedido: ");
+            int idPed = Utils.lerInt(Console.ReadLine(), 0, " Entrada inválida!\n Tente novamente: ");
+            Pedido pedidoPesquisado = new Pedido(idPed);
+            if (restaurante.buscarPedido(pedidoPesquisado).Id != -1)
+            {
+                Console.Write(" Digite o ID do Item: ");
+                int idItem = Utils.lerInt(Console.ReadLine(), 0, " Entrada inválida!\n Tente novamente: ");
+                Item itemPesquisado = new Item(idItem);
+                bool removeu = restaurante.buscarPedido(pedidoPesquisado).removerItem(itemPesquisado);
+                if (removeu)
+                {
+                    Utils.MensagemSucesso("Item removido!");
+                    idItem--;
+                }
+                else
+                    Utils.MensagemErro("Não foi possível remover o item.");
+            }
+            else
+                Utils.MensagemErro("ID do Pedido não encontrado.");
         }
 
         public static void consultarPedido()
@@ -134,7 +155,7 @@ namespace projeto_restaurante
 
         public static void cancelarPedido()
         {
-            
+
         }
 
         public static void listarPedidos()

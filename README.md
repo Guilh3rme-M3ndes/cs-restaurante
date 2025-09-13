@@ -20,13 +20,14 @@ com o objetivo de implementar um sistema para gerenciar os pedidos diários de u
 
 ```
 📁 cs-restaurante/
-├── 📁 projeto-restaurante/
-    ├── 📄 Program.cs
-    ├── 📄 Item.cs
-    ├── 📄 Pedido.cs
-    ├── 📄 Restaurante.cs
-    └── 📄 Utils.cs
-├── 📄 projeto-cursos.sln
+├── 📁 projeto-restaurante
+        📁projeto-restaurante
+        ├── 📄 Program.cs
+        ├── 📄 Item.cs
+        ├── 📄 Pedido.cs
+        ├── 📄 Restaurante.cs
+        └── 📄 Utils.cs
+    └── 📄 projeto-restaurante.sln
 └── 📄 README.md
 ```
 

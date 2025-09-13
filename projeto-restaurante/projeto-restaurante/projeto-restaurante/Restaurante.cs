@@ -57,7 +57,27 @@ namespace projeto_restaurante
 
         public bool cancelarPedido(Pedido pedido)
         {
-            return false;
+            int jj;
+            bool cancelou = false;
+            foreach (Pedido p in pedidos)
+            {
+                if (p.Id == pedido.Id)
+                {
+                    int ii = 0;
+                    while (ii < this.pedidos.Length && this.pedidos[ii].Id != pedido.Id)
+                    {
+                        ii++;
+                    }
+                    for (jj = ii; jj < this.pedidos.Length - 1; jj++)
+                    {
+                        this.pedidos[jj] = this.pedidos[jj + 1];
+                    }
+                    this.pedidos[jj] = new Pedido();
+                    cancelou = true;
+                    break;
+                }
+            }
+            return cancelou;
         }
     }
 }

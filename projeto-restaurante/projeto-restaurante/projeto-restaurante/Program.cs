@@ -114,7 +114,9 @@ namespace projeto_restaurante
                 bool adicionou = restaurante.buscarPedido(pedidoPesquisado).adicionarItem(novoItem);
                 if (adicionou)
                 {
-                    Utils.MensagemSucesso($"ID do Item: {novoItem.Id}\n Descrição: {novoItem.Descricao}\n Preço: R${novoItem.Preco.ToString("f")}\n Item adicionado!");
+                    Pedido pedido = restaurante.buscarPedido(pedidoPesquisado);
+                    Console.Write($"\n{pedido.dadosDoPedido()}");
+                    Utils.MensagemSucesso("Item adicionado!");
                     idItem++;
                 }
                 else
@@ -157,7 +159,7 @@ namespace projeto_restaurante
             if (restaurante.buscarPedido(pedidoPesquisado).Id != -1)
             {
                 Pedido pedido = restaurante.buscarPedido(pedidoPesquisado);
-                Console.Write($"{pedido.dadosDoPedido()}");
+                Console.Write($"\n{pedido.dadosDoPedido()}");
                 Utils.MensagemSucesso($"Total: R${pedido.calcularTotal().ToString("f")}");
             }
             else
@@ -166,12 +168,41 @@ namespace projeto_restaurante
 
         public static void cancelarPedido()
         {
-
+            Utils.Titulo("CANCELAR PEDIDO");
+            Console.Write(" Digite o ID do Pedido: ");
+            int idPed = Utils.lerInt(Console.ReadLine(), 0, " Entrada inválida!\n Tente novamente: ");
+            Pedido pedidoPesquisado = new Pedido(idPed);
+            if (restaurante.cancelarPedido(pedidoPesquisado))
+            {
+                Utils.MensagemSucesso("Pedido removido.");
+            }
+            else
+                Utils.MensagemErro("Pedido não encontrado.");
         }
 
         public static void listarPedidos()
         {
-
+            Utils.Titulo("LISTAR PEDIDO");
+            bool temPedido = false;
+            double totalDia = 0;
+            foreach(Pedido p in restaurante.Pedidos)
+            {
+                if (restaurante.buscarPedido(p).Id != -1)
+                {
+                    Console.WriteLine($" ID do Pedido: {p.Id}\n Valor Total: {p.calcularTotal().ToString("f")}");
+                    Console.WriteLine(new string('-', 44));
+                    totalDia += p.calcularTotal();
+                    temPedido = true;
+                }
+            }
+            if (temPedido)
+            {
+                Utils.MensagemSucesso($"Total do Dia: {totalDia.ToString("f")}");
+            }
+            else
+            {
+                Utils.MensagemErro("Nenhum pedido encontrado.");
+            }
         }
     }
 }

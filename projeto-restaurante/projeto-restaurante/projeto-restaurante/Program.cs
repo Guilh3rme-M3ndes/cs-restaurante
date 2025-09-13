@@ -114,7 +114,7 @@ namespace projeto_restaurante
                 bool adicionou = restaurante.buscarPedido(pedidoPesquisado).adicionarItem(novoItem);
                 if (adicionou)
                 {
-                    Utils.MensagemSucesso($"ID do Item: {novoItem.Id}\n Descrição: {novoItem.Descricao}\n Preço: R${novoItem.Preco}\n Item adicionado!");
+                    Utils.MensagemSucesso($"ID do Item: {novoItem.Id}\n Descrição: {novoItem.Descricao}\n Preço: R${novoItem.Preco.ToString("f")}\n Item adicionado!");
                     idItem++;
                 }
                 else
@@ -145,12 +145,23 @@ namespace projeto_restaurante
                     Utils.MensagemErro("Não foi possível remover o item.");
             }
             else
-                Utils.MensagemErro("ID do Pedido não encontrado.");
+                Utils.MensagemErro("Pedido não encontrado.");
         }
 
         public static void consultarPedido()
         {
-
+            Utils.Titulo("CONSULTAR PEDIDO");
+            Console.Write(" Digite o ID do Pedido: ");
+            int idPed = Utils.lerInt(Console.ReadLine(), 0, " Entrada inválida!\n Tente novamente: ");
+            Pedido pedidoPesquisado = new Pedido(idPed);
+            if (restaurante.buscarPedido(pedidoPesquisado).Id != -1)
+            {
+                Pedido pedido = restaurante.buscarPedido(pedidoPesquisado);
+                Console.Write($"{pedido.dadosDoPedido()}");
+                Utils.MensagemSucesso($"Total: R${pedido.calcularTotal().ToString("f")}");
+            }
+            else
+                Utils.MensagemErro("Pedido não encontrado ");
         }
 
         public static void cancelarPedido()

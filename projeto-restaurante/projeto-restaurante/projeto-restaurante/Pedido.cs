@@ -76,12 +76,32 @@ namespace projeto_restaurante
 
         public string dadosDoPedido()
         {
-            return "";
+            string itensDados = "";
+            foreach (Item item in this.itens)
+            {
+                if (item.Id != -1) 
+                {
+                    itensDados += $" ID: {item.Id}\n" +
+                        $" Descrição: {item.Descricao}\n" +
+                        $" Preço: {item.Preco.ToString("f")}\n" +
+                        $"{new string('-', 44)}\n";
+                }
+            }
+            return $" ID do pedido: {this.Id}\n" +
+                $" Cliente: {this.Cliente}\n" +
+                $"{new string('-', 44)}\n" +
+                $"{itensDados}";
         }
 
         public double calcularTotal()
         {
-            return 0;
+            double total = 0;
+            foreach (Item item in this.itens)
+            {
+                total += item.Preco;
+            }
+            return total;
         }
+        
     }
 }
